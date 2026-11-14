@@ -1,0 +1,25 @@
+replay job: res/ghost_replay_job.wasm under wasmtime 50.0.1 (c307ec81d 2026-10-29)
+alice's and bob's apps each hold a session key: only start_run, submit_run, expire_run, refill_ghost; no deposits; at most 1 NEAR at risk each
+1. alice flies a qualifier; it becomes a ghost
+  alice started run 9 as a qualifier (pot 0.5 NEAR locked before the cave exists) (seed d81555f9e3dd…): https://testnet.nearblocks.io/txns/GJmbdnX96M1zSSEtgEvENSYzsveJhPQJpXhkoENmZYsS
+  flew 388 points in the browser build; submitted 759 button changes claiming 388: https://testnet.nearblocks.io/txns/JC1LuQoYUyeJhf9VLebYKzb84GRC4N8Savzz9iUfDEN2
+✓ the contract's replay verifies it and mints it in the same transaction 388 points: minted as ghost #4 with a 0.500 NEAR pot · on-chain: this contract replayed the log
+✓ ghost #4 is a NEP-171 token owned by alice                       Ghost #4 · 388 pts
+2. bob challenges the ghost and loses
+  bob started run 10 against ghost #4 (seed 29d6d7ef9c4d…): https://testnet.nearblocks.io/txns/FNBNJSufPjBod4gfwZY95qdooTV97oGpJUr6ErqpbCrY
+  flew 74 points in the browser build; submitted 215 button changes claiming 74: https://testnet.nearblocks.io/txns/3539u3jqU1ExgMHky6dZnrQunZuoC8zck99xqVcQDXUr
+✓ bob's run doesn't beat the ghost                                 ghost #4 held (388 vs 74); the ghost's owner earned 0.070 NEAR and its pot grew 0.025
+✓ his 0.1 stake splits: alice 0.07, the house 0.005, the pot +0.025 alice +0.07 NEAR, house +0.005 NEAR, pot 0.525 NEAR
+3. bob challenges again and wins
+  bob started run 11 against ghost #4 (seed cfb50c2c697a…): https://testnet.nearblocks.io/txns/7xSa7P7ryVEsvF2zFZSknew8enpgtfxEcBfRVgcAg2fr
+  flew 1259 points in the browser build; submitted 1511 button changes claiming 1259: https://testnet.nearblocks.io/txns/MsJBrtFhHyZn6wXQyFkhFzQp9ej3hebDQqF3fPGp9BX
+✓ bob beats the ghost                                              beat ghost #4 (1259 vs 388): won its 0.525 NEAR pot
+✓ bob takes the 0.525 pot (less the run's storage)                 +0.52 NEAR
+✓ ghost #4's record: defended 1, beaten 1, pot 0                   earned 0.07 NEAR, raked 0.005 NEAR
+  as a wallet shows it: A recorded run in Ghost Duels' cave: 313 m, 3 gems. Defended 1 (closest call 1259) · forfeits 0 · beaten 1. Earned its owners 0.070 NEAR; its pot grew 0.025 NEAR from kept stakes, and the house took 0.005 NEAR in rake, so faking this record would have cost at least that rake plus the growth left at risk in the pot. Pot 0.000 NEAR, stake 0.100 NEAR; beaten, waiting for a refill.
+4. bob flies a qualifier of his own: the new champion
+  bob started run 12 as a qualifier (pot 0.3 NEAR locked before the cave exists) (seed 5ca7dd52f70c…): https://testnet.nearblocks.io/txns/D35Ebmm4QeaRdWGHTepyw1y47wRZgtS4yxF1V77nMeXX
+  flew 2161 points in the browser build; submitted 1727 button changes claiming 2161: https://testnet.nearblocks.io/txns/3233GkS2Jq3QrngBXwW2c7mYHsETLqmdqPRXKejt9Svb
+✓ bob's qualifier becomes ghost #5 (2161 points)                   2161 points: minted as ghost #5 with a 0.300 NEAR pot
+contract v2.ghost-duels-jbx5v9.testnet: https://testnet.nearblocks.io/address/v2.ghost-duels-jbx5v9.testnet
+All 8 checks passed.

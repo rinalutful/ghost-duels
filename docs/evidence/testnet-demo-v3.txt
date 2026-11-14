@@ -1,0 +1,45 @@
+replay job: res/ghost_replay_job.wasm under wasmtime 50.0.1 (c307ec81d 2026-10-29)
+AccountDoesNotExistError: Account alice.gd-v2-59lavk.testnet does not exist at block height 276515401
+  accountId: 'alice.gd-v2-59lavk.testnet',
+  blockHash: '9UQyMinNx4EtGtahFB9kB9BZSQ9nZM1fVBi93kZVifFZ',
+  blockHeight: 276515401
+AccountDoesNotExistError: Account alice.gd-v2-59lavk.testnet does not exist at block height 276515401
+  accountId: 'alice.gd-v2-59lavk.testnet',
+  blockHash: '9UQyMinNx4EtGtahFB9kB9BZSQ9nZM1fVBi93kZVifFZ',
+  blockHeight: 276515401
+created alice.gd-v2-59lavk.testnet with 1.5 NEAR
+AccountDoesNotExistError: Account bob.gd-v2-59lavk.testnet does not exist at block height 276515406
+  accountId: 'bob.gd-v2-59lavk.testnet',
+  blockHash: '5sZ4NRhj3RSiXSoMnEhZBqpHB8Wj2A2HHXECAfDDyUtw',
+  blockHeight: 276515406
+AccountDoesNotExistError: Account bob.gd-v2-59lavk.testnet does not exist at block height 276515406
+  accountId: 'bob.gd-v2-59lavk.testnet',
+  blockHash: '5sZ4NRhj3RSiXSoMnEhZBqpHB8Wj2A2HHXECAfDDyUtw',
+  blockHeight: 276515406
+created bob.gd-v2-59lavk.testnet with 1.5 NEAR
+alice.gd-v2-59lavk.testnet deposits 1.1 NEAR into the game: https://testnet.nearblocks.io/txns/AdSzDFcSBpNLeECuxZascFYBWJGiSF4MvyJZ6PP4RsA1
+bob.gd-v2-59lavk.testnet deposits 1.1 NEAR into the game: https://testnet.nearblocks.io/txns/DPRPqEGYWrztuCbni9sksbvfsAJXyDsDWABm92krNmxm
+alice's and bob's apps each hold a session key: only start_run, submit_run, expire_run, refill_ghost; no deposits; at most 1 NEAR at risk each
+1. alice flies a qualifier; it becomes a ghost
+  alice started run 1 as a qualifier (pot 0.5 NEAR locked before the cave exists) (seed adfd10868df7…): https://testnet.nearblocks.io/txns/Gw5ELNQJ9kzmB2SyQK52351iGekeHT6UcYZQ933zBtpw
+  flew 363 points in the browser build; submitted 723 button changes claiming 363: https://testnet.nearblocks.io/txns/AQooqCQZ58iQKJsnDS7kPfx1CqvuRYSBzpV6S4x4AU74
+✓ the contract's replay verifies it and mints it in the same transaction 363 points: minted as ghost #1 with a 0.500 NEAR pot · on-chain: this contract replayed the log
+✓ ghost #1 is a NEP-171 token owned by alice                       Ghost #1 · 363 pts
+2. bob challenges the ghost and loses
+  bob started run 2 against ghost #1 (seed 623116c624f4…): https://testnet.nearblocks.io/txns/2po33VfbajYQZg2AH56DtTSnqAJEDWmXFa8DhKqRJcCU
+  flew 73 points in the browser build; submitted 217 button changes claiming 73: https://testnet.nearblocks.io/txns/BybbS9WRenqcourJnPTq4WKGC6YSFQ87Fmb5moe587G7
+✓ bob's run doesn't beat the ghost                                 ghost #1 held (363 vs 73); the ghost's owner earned 0.070 NEAR and its pot grew 0.025
+✓ his 0.1 stake splits: alice 0.07, the house 0.005, the pot +0.025 alice +0.07 NEAR, house +0.005 NEAR, pot 0.525 NEAR
+3. bob challenges again and wins
+  bob started run 3 against ghost #1 (seed ee2acd9f782d…): https://testnet.nearblocks.io/txns/3ifPCDE7NFhUnTAVPWRFTDoCNuMXZKMaexqxRCfgm924
+  flew 1327 points in the browser build; submitted 1700 button changes claiming 1327: https://testnet.nearblocks.io/txns/HjiK1qDUdEDVFWzRsW6gaXhT8XphKhgdfcCg9DWotYN1
+✓ bob beats the ghost                                              beat ghost #1 (1327 vs 363): won its 0.525 NEAR pot
+✓ bob takes the 0.525 pot (less the run's storage)                 +0.52 NEAR
+✓ ghost #1's record: defended 1, beaten 1, pot 0                   earned 0.07 NEAR, raked 0.005 NEAR
+  as a wallet shows it: A recorded run in Ghost Duels' cave: 313 m, 2 gems. Defended 1 (best losing challenge 73) · forfeits 0 · beaten 1. Earned its owners 0.070 NEAR; kept stakes grew its pot 0.025 NEAR and paid the house 0.005 NEAR. A defence can be faked from a second account, but faking one costs at least 0.030 NEAR: the rake, and the pot share, which goes to the house if the owner retires the ghost. Pot 0.000 NEAR, stake 0.100 NEAR; beaten, waiting for a refill.
+4. bob flies a qualifier of his own: the new champion
+  bob started run 4 as a qualifier (pot 0.3 NEAR locked before the cave exists) (seed 22285988c3c6…): https://testnet.nearblocks.io/txns/A8pwcU9J9RHWfmwz2UFMfByeoQ8b8go2UGJNXSBMb7CT
+  flew 1476 points in the browser build; submitted 1602 button changes claiming 1476: https://testnet.nearblocks.io/txns/HEJvr3pJEobgmn3Rn3K6Nwm23AmLpxgtmBCjjoS4BPwd
+✓ bob's qualifier becomes ghost #2 (1476 points)                   1476 points: minted as ghost #2 with a 0.300 NEAR pot
+contract v3.gd-v2-59lavk.testnet: https://testnet.nearblocks.io/address/v3.gd-v2-59lavk.testnet
+All 8 checks passed.

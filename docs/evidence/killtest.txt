@@ -1,0 +1,53 @@
+Kill test: browser build (Node v23.11.0) vs wasm32-wasip2 replay job (wasmtime 50.0.1 (c307ec81d 2026-10-29))
+res/ghost_sim_web.wasm   sha256 ee2828706eedd721e1b7cec2fc1a5075cfb181659ebbb4f5bac958399f44f8bd
+res/ghost_replay_job.wasm sha256 693ef86c955b155b439e2417713743e00eef43b5264a2cd4acf54d37675d1080
+44 logs (40 from live play) + 3 refusals; each line: browser/job
+MATCH live-0               toggles= 830 ticks=1785 score=  628/  628 state=fc97d003b31f11b0/fc97d003b31f11b0
+MATCH live-1               toggles=1266 ticks=3005 score= 1335/ 1335 state=3feb331a19166396/3feb331a19166396
+MATCH live-2               toggles= 900 ticks=1846 score=  774/  774 state=e455751a4e39a59a/e455751a4e39a59a
+MATCH live-3               toggles=1579 ticks=3555 score= 1641/ 1641 state=d6118292c88849a1/d6118292c88849a1
+MATCH live-4               toggles= 874 ticks=2067 score=  827/  827 state=7869859d384e5ce0/7869859d384e5ce0
+MATCH live-5               toggles= 956 ticks=2123 score=  847/  847 state=1f2b77363405754e/1f2b77363405754e
+MATCH live-6               toggles=1444 ticks=3370 score= 1512/ 1512 state=6fb1f574b693b7d7/6fb1f574b693b7d7
+MATCH live-7               toggles=1301 ticks=1863 score=  780/  780 state=a94f91e238941a7e/a94f91e238941a7e
+MATCH live-8               toggles=1170 ticks=3211 score= 1620/ 1620 state=90cbcf81a1a2963b/90cbcf81a1a2963b
+MATCH live-9               toggles=1205 ticks=3039 score= 1274/ 1274 state=c5f73cd8789c0d65/c5f73cd8789c0d65
+MATCH live-10              toggles= 758 ticks=1717 score=  630/  630 state=4a9b06c294215b87/4a9b06c294215b87
+MATCH live-11              toggles=1428 ticks=3214 score= 1271/ 1271 state=6651003fa768ed16/6651003fa768ed16
+MATCH live-12              toggles= 820 ticks=2363 score= 1035/ 1035 state=b3b8584ba1edb012/b3b8584ba1edb012
+MATCH live-13              toggles= 865 ticks=2051 score=  896/  896 state=e4b8a2b9f8dfeee2/e4b8a2b9f8dfeee2
+MATCH live-14              toggles=1632 ticks=2812 score= 1083/ 1083 state=3a169a4ab897bea0/3a169a4ab897bea0
+MATCH live-15              toggles=1532 ticks=2899 score= 1167/ 1167 state=634469660817dac6/634469660817dac6
+MATCH live-16              toggles= 662 ticks=1486 score=  553/  553 state=f79ff6a5809283af/f79ff6a5809283af
+MATCH live-17              toggles= 996 ticks=2554 score= 1132/ 1132 state=4a4b193bcedf7cb1/4a4b193bcedf7cb1
+MATCH live-18              toggles=1384 ticks=3069 score= 1286/ 1286 state=ea86be7db5b59b48/ea86be7db5b59b48
+MATCH live-19              toggles=1368 ticks=2977 score= 1199/ 1199 state=57d05def288ab69b/57d05def288ab69b
+MATCH live-20              toggles= 304 ticks= 679 score=  231/  231 state=2f70fd3d2e6e462a/2f70fd3d2e6e462a
+MATCH live-21              toggles=1714 ticks=3110 score= 1353/ 1353 state=1acb7479030395f7/1acb7479030395f7
+MATCH live-22              toggles=1500 ticks=3384 score= 1518/ 1518 state=0c814ce498003272/0c814ce498003272
+MATCH live-23              toggles=1595 ticks=3508 score= 1746/ 1746 state=b396cda2df111e79/b396cda2df111e79
+MATCH live-24              toggles= 606 ticks=1525 score=  491/  491 state=b71e84881463b267/b71e84881463b267
+MATCH live-25              toggles= 800 ticks=1866 score=  781/  781 state=1e5da7c761db5d5a/1e5da7c761db5d5a
+MATCH live-26              toggles= 424 ticks= 903 score=  296/  296 state=9e3833cc3d25d909/9e3833cc3d25d909
+MATCH live-27              toggles= 948 ticks=2037 score=  916/  916 state=b65d0c87f08b587f/b65d0c87f08b587f
+MATCH live-28              toggles= 838 ticks=1511 score=  611/  611 state=40be2257fefe5d13/40be2257fefe5d13
+MATCH live-29              toggles=1014 ticks=2328 score=  922/  922 state=9612ea3ad98bfaf3/9612ea3ad98bfaf3
+MATCH live-30              toggles= 590 ticks=1237 score=  423/  423 state=717294efaa02dee8/717294efaa02dee8
+MATCH live-31              toggles=1398 ticks=3144 score= 1517/ 1517 state=bf25a89db4239416/bf25a89db4239416
+MATCH live-32              toggles= 866 ticks=2385 score= 1093/ 1093 state=5d4f6f25a0111847/5d4f6f25a0111847
+MATCH live-33              toggles=1363 ticks=3185 score= 1259/ 1259 state=99eb0490ab982fb0/99eb0490ab982fb0
+MATCH live-34              toggles=1142 ticks=2482 score= 1055/ 1055 state=534d5cca24e8008c/534d5cca24e8008c
+MATCH live-35              toggles=1928 ticks=3200 score= 1565/ 1565 state=4c70a6ff60c66144/4c70a6ff60c66144
+MATCH live-36              toggles= 310 ticks= 787 score=  287/  287 state=a194b1c6dbe82566/a194b1c6dbe82566
+MATCH live-37              toggles= 869 ticks=2320 score=  969/  969 state=03f3a1039066168e/03f3a1039066168e
+MATCH live-38              toggles=1320 ticks=3174 score= 1330/ 1330 state=19d0f0768e8c323a/19d0f0768e8c323a
+MATCH live-39              toggles= 822 ticks=1862 score=  730/  730 state=c351b822aa3c8a0a/c351b822aa3c8a0a
+MATCH empty-log            toggles=   0 ticks=  30 score=    7/    7 state=665bd7f255ddd44d/665bd7f255ddd44d
+MATCH hold-forever         toggles=   1 ticks=  29 score=    7/    7 state=d5e85c049b710813/d5e85c049b710813
+MATCH last-tick            toggles=   1 ticks=  30 score=    7/    7 state=665bd7f255ddd44d/665bd7f255ddd44d
+MATCH toggles-after-crash  toggles=   5 ticks=  42 score=   10/   10 state=6dd31a4a35bb2f85/6dd31a4a35bb2f85
+MATCH refuse-not-increasing browser=-1 job="the input log's ticks must strictly increase"
+MATCH refuse-past-end      browser=-1 job="the input log has a tick at or past 3600"
+MATCH refuse-too-long      browser=-1 job="the input log has more than 2048 button changes"
+
+PASS: 47/47 identical. Digest of all results: 3b478e3a84315beb6c41c9e28ca34235da2f2bb0a9e22b2759cea0bb324e0a61

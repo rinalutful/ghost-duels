@@ -1,0 +1,25 @@
+[workspace]
+members = ["ghost-duels", "mock-outlayer"]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+rust-version = "1.93"
+repository = "https://github.com/rinalutful/ghost-duels"
+license = "MIT"
+
+[workspace.dependencies]
+near-sdk = "=5.29.1"
+
+[profile.release]
+codegen-units = 1
+opt-level = "z"
+lto = true
+debug = false
+panic = "abort"
+overflow-checks = true
+
+# Tests replay whole games through the sim; optimising just that crate in test builds makes the
+# property and attack tests about ten times faster on a small judge box (the wasm build is release).
+[profile.dev.package.ghost-sim]
+opt-level = 3

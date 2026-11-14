@@ -1,0 +1,16 @@
+[package]
+name = "sandbox"
+description = "Every Ghost Duels path on a local NEAR sandbox: on-chain replay, the registered runner (wasmtime), OutLayer's yield/resume against a mock, cheats, session keys. Free, offline, no faucet"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+# Not a contract: runs on the stable toolchain (near-workspaces needs Rust 1.95+).
+[dependencies]
+near-workspaces = "0.24.0"
+tokio = { version = "1", features = ["full"] }
+serde_json = "1"
+anyhow = "1"
+sha2 = "0.10"
+hex = "0.4"
+ghost-sim = { path = "../game/sim" }

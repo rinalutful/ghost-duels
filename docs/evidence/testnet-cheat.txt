@@ -1,0 +1,26 @@
+replay job: res/ghost_replay_job.wasm under wasmtime 50.0.1 (c307ec81d 2026-10-29)
+alice's and bob's apps each hold a session key: only start_run, submit_run, mint_ghost, expire_run; no deposits
+setup: alice qualifies and mints a ghost
+  alice started run 4 (seed a65faca02010…): https://testnet.nearblocks.io/txns/B8GusAKebRv48UuWyamdwszxgatsixkjwsrNyYZRGVbR
+  flew 388 points in the browser build; submitted 765 button changes claiming 388: https://testnet.nearblocks.io/txns/4sP29onFcpATpvL2eXqRQ9gvMkWuktcqji3P1ur1GyxN
+  runner replayed run 4 under wasmtime: score 388, state 3cdcc88c02666a9c… https://testnet.nearblocks.io/txns/3cTobnrrzCT5r9JHT2bJtUHXKEqADWh8N71UNkXKPJjp
+  ghost #3: 388 points, pot 0.3 NEAR: https://testnet.nearblocks.io/txns/HzghedGc7DtYJTxmRQSkTciCnSiJLKgzG8kYmayae6dC
+1. an edited score
+  bob started run 5 against ghost #3 (seed 56f273d038c5…): https://testnet.nearblocks.io/txns/CrVh4zjTiehsSXpd86tvBhVtAei4CjAtWEMd7cnmSNrK
+  flew 98 points in the browser build; submitted 215 button changes claiming 488: https://testnet.nearblocks.io/txns/EWyHALjTVUdESqsv1D65jna2eEoPfEFCU7LCM8zB6q7z
+  runner replayed run 5 under wasmtime: score 98, state f2a521b6d6e0e19f… https://testnet.nearblocks.io/txns/8A9QaSCDDcMwRjfdxyEgvChAQch2CHxF8FS4jpFVwYXu
+✓ bob flies 98 and claims 488: refused                             refused: claimed 488, but the replay of the submitted inputs scores 98; the ghost's owner earned 0.05 NEAR
+✓ …his stake goes to the ghost's owner; the pot is untouched       
+2. the champion's inputs, copied onto another cave
+  bob started run 6 against ghost #3 (seed 110a4e9263c2…): https://testnet.nearblocks.io/txns/FZQVfvheSUDHcW323yHMwuLxgvJRUReAQkryhrjQNMmg
+  flew 73 points in the browser build; submitted 765 button changes claiming 389: https://testnet.nearblocks.io/txns/HEwtE55kHgPfNTh5AteUt6WAy1j3TSeYekARs4WTKeHd
+  runner replayed run 6 under wasmtime: score 192, state 3faa32f8ac8972f8… https://testnet.nearblocks.io/txns/9Zh78w9ahSHcPTH7ZErSc35jSWd1ffWaLAabqvdm7Lqm
+✓ bob submits ghost #3's 765 button changes claiming 389: refused  refused: claimed 389, but the replay of the submitted inputs scores 192; the ghost's owner earned 0.05 NEAR
+3. a malformed log, someone else's run, a fake runner
+✓ a log whose ticks go backwards is refused at submit              the input log's ticks must strictly increase
+✓ alice can't submit bob's run                                     not your run
+✓ alice posing as the runner (a made-up 9999) is refused           not a registered runner
+4. the session key moving money
+✓ bob's app can't withdraw (a function-call key attaches no deposit) Deposit is not allowed with function call
+✓ …nor call a method outside the game's (nft_transfer)             Access key does not allow method nft_transfer
+All 8 cheats refused.

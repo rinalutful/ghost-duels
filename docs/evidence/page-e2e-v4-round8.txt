@@ -1,0 +1,29 @@
+funder near-ghost-duels-rywu8u.testnet: 0.536 NEAR; alice alice.near-ghost-duels-rywu8u.testnet; contract v4.near-ghost-duels-rywu8u.testnet
+
+1. a visitor presses Play for real
+  (faucet stand-in: near-ghost-duels-rywu8u.testnet created gd-6e002v5c3g.testnet with 0.48 NEAR for the browser's public key: https://testnet.nearblocks.io/txns/BggtCQDgK8Ds4RXFhJSX1W8XiANbpuN2vBL85FubhHRG)
+✓ the browser made guest gd-6e002v5c3g.testnet, with a game key limited to the game's methods, and deposited in-game 0.124 NEAR; keys: 2 (1 function-call)
+
+2. alice flies a private duel naming the guest; the guest races it from the invite link
+  alice: 464 points: minted as ghost #15 with a 0.050 NEAR pot
+✓ the invite link opens "You're invited" to ghost #15              You're invited A ghost is a run somebody flew before you, in a cave of its own. You get a fresh cave; the ghos
+  THE GHOST HOLDS 192 vs 464 ghost #15 −0.010 NEAR: 0.007 to its owner, 0.003 into its pot, 0.001 to the house Paid out: Lost. ghost #15 held (464 vs 192); the ghost's owner earned 0.007 NEAR and its pot grew 0.003. see the transaction on-cha
+✓ the contract replayed the guest's flight and settled it: Lost, with the transaction 
+✓ alice earned 70% of the guest's 0.01 NEAR stake                  alice +0.007 NEAR, guest −0.016 NEAR = its stake, kept
+
+3. the guest flies a duel naming alice; alice races it and falls short
+  try 1: GHOST #16 212 points: minted as ghost #16 with a 0.050 NEAR pot. see the transaction Send your challengers this link. When they open it, they can race
+✓ the guest's duel qualifier minted ghost #16, naming only alice (signed with its full-access key) 
+✓ alice (named) races it and falls short: the guest earns 70% of her 0.01 NEAR ghost #16 held (212 vs 74); the ghost's owner earned 0.007 NEAR and its pot grew 0.003; guest +0.007 NEAR
+
+4. the guest's ghost side, then the public ladder
+✓ Challengers… names alice and bob (full-access key, 1 yoctoNEAR)  alice.near-ghost-duels-rywu8u.testnet, bob.near-ghost-duels-rywu8u.testnet · Naming 2 challengers for ghost #16: done. see the transactio
+✓ Retire reaches the contract, which keeps a new ghost's pot locked for a day Retiring ghost #16 (its pot is locked until 11/11/2026, 7:48:04 AM): the contract refused: this pot is locked until 1794
+✓ Give… hands ghost #16 (NEP-171) to alice                         alice.near-ghost-duels-rywu8u.testnet
+✓ the guest races public-ladder ghost #2 from the list: recorded, and no money moves Paid out: Lost
+
+5. the guest cashes out back to the funder
+✓ Cash out… withdraws, closes the guest and sends everything to the funder Done: gd-6e002v5c3g.testnet is closed and everything went to near-ghos · funder 0.536 NEAR → 0.446 NEAR
+✓ the page asked for every answer in the page: no browser prompt or dialog opened 0 dialogs
+
+All 12 checks passed.

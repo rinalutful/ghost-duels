@@ -1,0 +1,7 @@
+{
+  "version": "v4",
+  "contract": "v4.near-ghost-duels-rywu8u.testnet",
+  "funder": "near-ghost-duels-rywu8u.testnet",
+  "wasm": "v4/ghost_duels.wasm",
+  "source": "v5"
+}

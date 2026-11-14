@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ghost Duels: beat a recorded run</title>
+  <meta name="description" content="A one-button cave race against recorded runs. Race a ghost for free, or duel a friend for its pot." />
+  <meta name="theme-color" content="#f2ecdf" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%232c55c9' d='M8 1.5a5.5 5.5 0 0 0-5.5 5.5v7.5l1.8-1.4 1.8 1.4L8 13.1l1.9 1.4 1.8-1.4 1.8 1.4V7A5.5 5.5 0 0 0 8 1.5z'/%3E%3Crect x='5.4' y='5.6' width='1.6' height='2.6' fill='%23f2ecdf'/%3E%3Crect x='9' y='5.6' width='1.6' height='2.6' fill='%23f2ecdf'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <header class="top">
+    <h1 class="mark"><span class="mark-ghost">Ghost</span> <span class="mark-duels">Duels</span></h1>
+    <p class="tagline">Fly your own cave. Beat a recorded run's score.</p>
+    <button id="mute" type="button" class="top-btn" aria-pressed="true">Sound: on</button>
+    <a class="top-link" href="#hood">How the score is checked</a>
+  </header>
+  <main class="layout">
+    <section class="play" aria-label="The game">
+      <div id="stage">
+        <canvas id="game" width="1280" height="720" aria-label="The cave. Hold Space, click or touch to climb; let go to fall."></canvas>
+        <div id="pad" aria-hidden="true"><span>Hold to climb</span></div>
+        <div id="overlay" class="hidden" aria-live="polite"></div>
+      </div>
+      <section id="you-box" class="player" aria-labelledby="you-h">
+        <h2 id="you-h">You</h2>
+        <div id="you"></div>
+        <p id="you-status" role="status"></p>
+      </section>
+    </section>
+    <aside class="board" aria-labelledby="board-h">
+      <h2 id="board-h">The board</h2>
+      <p class="board-sub">Each line is the path a ghost flew, recorded press by press; the cross is where it crashed.</p>
+      <div id="lists"></div>
+      <p id="net" class="net">Reading the board…</p>
+    </aside>
+    <section class="ways" aria-labelledby="ways-h">
+      <h2 id="ways-h">Three ways to play</h2>
+      <ol>
+        <li><b>Race a ghost, free.</b> A ghost is a run somebody flew in their own cave. You get a fresh cave of yours; the ghost flies beside you at the pace it flew and passes through your rock. Fly further and grab gems to beat its score.</li>
+        <li><b>Play for real.</b> One click makes you a free test account in this browser, with test money in it. Your races are then checked by the game's referee and count on the board.</li>
+        <li><b>Duel a friend.</b> Fly a ghost of your own, name who may race it and put a pot on it, then send them the invite link. Beat it and the pot is theirs; fall short and 70% of their stake is yours. <span id="duel-caveat">Duel people you trust: the contract checks every score, but a ghost's owner can still have a second account win the pot first.</span></li>
+      </ol>
+    </section>
+    <details class="hood" id="hood">
+      <summary>Under the hood: how the score is checked</summary>
+      <div class="hood-body">
+        <p>The referee is a contract on NEAR's test network, <a id="hood-contract" href="#">v4</a>. It never trusts the score this page reports. Before your cave exists it locks the stake; then it draws the cave from the chain's randomness. When you land, this page sends only the moments your button changed, and the contract replays them with the same Rust simulation this page runs (compiled to wasm), then pays out in the same transaction. Its account has no keys, so nobody can change its code or move its money.</p>
+        <p><b>Check it yourself:</b> press <b>Watch</b> on any ghost on the board. This page re-flies the ghost's recorded presses on its cave and compares the result with the score and the log hash on chain. Or run <code>npm run judge</code> from <a href="https://github.com/rinalutful/ghost-duels">the source</a> (free, no keys).</p>
+        <h3>Your last run, as this page sent it</h3>
+        <pre id="payload">Fly a run to see what gets submitted: the ticks where the button changed, not a score.</pre>
+      </div>
+    </details>
+  </main>
+  <footer>
+    Ghost Duels · built for NEAR HACKATHON · runs on NEAR testnet, so all money here is test money · <a href="https://github.com/rinalutful/ghost-duels">source</a>
+  </footer>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

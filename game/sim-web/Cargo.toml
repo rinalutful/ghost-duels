@@ -1,0 +1,14 @@
+[package]
+name = "ghost-sim-web"
+description = "The browser build of ghost-sim: plain C-ABI exports, no wasm-bindgen, so the same .wasm loads in Vite and in Node"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+ghost-sim = { path = "../sim" }

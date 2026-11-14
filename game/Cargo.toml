@@ -1,0 +1,21 @@
+# The game: one deterministic simulation (`sim`), and the two front-ends that run it:
+#   sim-web     wasm32-unknown-unknown, for the browser (and Node, in the kill test)
+#   replay-job  wasm32-wasip2, the replay job a TEE (OutLayer) or a registered runner runs under wasmtime
+# The contract (../contracts) links `sim` too, for the on-chain replay mode.
+[workspace]
+members = ["sim", "sim-web", "replay-job"]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+rust-version = "1.93"
+repository = "https://github.com/rinalutful/ghost-duels"
+license = "MIT"
+
+[profile.release]
+codegen-units = 1
+opt-level = "z"
+lto = true
+debug = false
+panic = "abort"
+strip = true

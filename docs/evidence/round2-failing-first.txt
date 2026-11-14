@@ -1,0 +1,11 @@
+test tests::attack_zero_cap_key_cannot_burn_the_balance ... FAILED
+test tests::attack_cheap_qualifier_then_refill_is_refused ... FAILED
+test tests::attack_relocking_a_ghost_never_blocks_a_challenger ... FAILED
+test tests::attack_wash_trade_near_misses_cost_what_the_record_says ... FAILED
+thread 'tests::attack_zero_cap_key_cannot_burn_the_balance' (29718733) panicked at ghost-duels/src/tests.rs:115:18:
+thread 'tests::attack_cheap_qualifier_then_refill_is_refused' (29718730) panicked at ghost-duels/src/tests.rs:115:18:
+thread 'tests::attack_relocking_a_ghost_never_blocks_a_challenger' (29718731) panicked at ghost-duels/src/lib.rs:559:13:
+someone is racing this ghost right now; try again in a minute
+thread 'tests::attack_wash_trade_near_misses_cost_what_the_record_says' (29718732) panicked at ghost-duels/src/tests.rs:796:5:
+20 fake defences cost the pair only 0.207
+test result: FAILED. 0 passed; 4 failed; 0 ignored; 0 measured; 26 filtered out; finished in 2.71s

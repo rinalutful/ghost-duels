@@ -1,0 +1,80 @@
+Ghost Duels on a local sandbox
+
+✓ the owner can't set a replay fee above 0.05 NEAR                         replay fee at most 0.05 NEAR
+✓ only the owner changes the replay mode                                   only the owner
+✓ an on-chain-only deploy (v3's) refuses even its owner's runner           this deploy replays on-chain only: no runners, no OutLayer
+
+1. On-chain replay (the contract runs the same sim crate)
+✓ run 1: contract = wasip2 job = native (425 ticks, 319 toggles)           score 135, 3.4 Tgas burnt in all; on-chain replay of 425 ticks used 0.15 Tgas
+✓ run 2: contract = wasip2 job = native (1524 ticks, 775 toggles)          score 566, 4.3 Tgas burnt in all; on-chain replay of 1524 ticks used 0.54 Tgas
+✓ run 3: contract = wasip2 job = native (2621 ticks, 1561 toggles)         score 958, 5.7 Tgas burnt in all; on-chain replay of 2621 ticks used 0.97 Tgas
+✓ run 4: contract = wasip2 job = native (2353 ticks, 1414 toggles)         score 931, 5.5 Tgas burnt in all; on-chain replay of 2353 ticks used 0.86 Tgas
+✓ run 5: contract = wasip2 job = native (3284 ticks, 2048 toggles)         score 1500, 6.6 Tgas burnt in all; on-chain replay of 3284 ticks used 1.23 Tgas
+✓ the on-chain replay of a full 60 s run fits in one call                  max 6.6 Tgas of 300
+
+2. The story (Runner mode: a registered runner replays with the wasip2 job under wasmtime)
+✓ alice's qualifier (pot locked before the cave existed): the runner's replay verifies it "420 points: minted as ghost #1 with a 1.000 NEAR pot" · "runner dev-20261110064942-94007345102862.test.near: the wasip2…
+✓ …and it became ghost #1 by itself: 1 NEAR pot, 0.2 NEAR a challenge      ghost #1 · 420 pts
+✓ ghost #1 is a NEP-171 token owned by alice                               "Ghost #1 · 420 pts"
+✓ bob challenges ghost #1 and loses                                        84 vs 420: "ghost #1 held (420 vs 84); the ghost's owner earned 0.140 NEAR and its pot grew 0.050"
+✓ the 0.2 stake splits: alice 0.14, the house 0.01, the pot +0.05          alice +0.140, house +0.010, pot 1.050
+✓ bob challenges again and beats the ghost                                 546 vs 420: "beat ghost #1 (546 vs 420): won its 1.050 NEAR pot"
+✓ bob takes the grown pot (1.05 NEAR or more; net of his fee and storage)  bob +1.0339 after 1 tries
+✓ ghost #1's record: defended at least 1, beaten 1, pot 0                  earned 0.140
+✓ a beaten ghost can't be challenged until its owner refills it            this ghost has no pot (it was beaten); its owner can refill it
+✓ bob flies a qualifier of his own: ghost #2, the new champion             1419 pts · "1419 points: minted as ghost #2 with a 1.000 NEAR pot"
+✓ a fresh ghost's pot can't be retired for a day (no mint-and-withdraw)    this pot is locked until 1794379799448 ms (pot_lock_secs after it was minted, refilled or grew)
+✓ alice sells ghost #1 to carol (nft_transfer, 1 yocto)                    accepted: null
+✓ its metadata shows the record, and says a record can be faked            "A recorded run in Ghost Duels' cave: 345 m, 3 gems. Defended 1 (best losing challenge 84) · forfeits 0 · beaten 1. Earn…
+✓ carol refills ghost #1's pot: it's open again                            accepted: {"beaten":1,"best_challenge":84,"challengers":["dev-20261110064941-28561553332711.test.near","dev-202611100649…
+✓ nft_tokens_for_owner(bob) lists ghost #2                                 1
+
+3. Cheats
+✓ a stranger (no one named them) can't race a staked ghost: it's a private duel this ghost is a private duel and its owner hasn't named you: staked races are only between players who chose each other …
+✓ an edited score (claims more than the replay) is refused                 "refused: claimed 1519, but the replay of the submitted inputs scores 136; the ghost's owner earned 0.070 NEAR and its p…
+✓ …the stake is kept (the owner's 70%, the pot +25%), counted as a forfeit claimed 1519, replay 136; pot 1.025
+✓ a winning log from another cave (wrong seed) doesn't reproduce its score "refused: claimed 546, but the replay of the submitted inputs scores 436; the ghost's owner earned 0.070 NEAR and its po…
+✓ a malformed log is refused at submit                                     the input log's ticks must strictly increase
+✓ nobody can submit someone else's run                                     not your run
+✓ a run can't be submitted twice                                           this run was already submitted or settled
+✓ a replay from an account that isn't a registered runner is refused       not a registered runner
+✓ a runner can't settle a run with the replay of a different log           that replay is of a different log than the one submitted
+✓ …and the honest replay then verifies it                                  
+
+4. OutLayer request_execution with yield/resume (SANDBOX MOCK of outlayer.testnet)
+✓ OutLayer mode needs its config first                                     set_outlayer first
+✓ the request pins the job by sha256, wasip2, and carries {seed, log}      request 0 from "dev-20261110064941-77807463739623.test.near", 0.020 NEAR attached
+✓ the worker resolves; the yield resumes into on_replay: "Verified"        "verified: 985 points"
+✓ the request pins the job by sha256, wasip2, and carries {seed, log}      request 1 from "dev-20261110064941-77807463739623.test.near", 0.020 NEAR attached
+✓ the worker resolves; the yield resumes into on_replay: "Won"             "beat ghost #1 (740 vs 420): won its 0.500 NEAR pot"
+✓ a failed job comes back as null: the contract replays the log itself, the loss stands "ghost #2 held (1419 vs 188); the ghost's owner earned 0.070 NEAR and its pot grew 0.025" · "on-chain fallback (OutLayer…
+✓ …no free refund: dave paid the 0.1 stake and the OutLayer fee            dave −0.1261 (stake 0.1 + fee 0.02 + storage)
+✓ …and the ghost is free again                                             
+✓ a yield nobody resolves times out: on_replay gets null and replays it on-chain "verified: 84 points" · "on-chain fallback (OutLayer returned no output (the job failed or timed out))"
+
+5. Session keys (a function-call key that plays from the in-game balance)
+✓ a session key with no spending cap can't stake                           this key has no spending cap: set one with set_key_cap from a full-access key, or attach 1 yoctoNEAR
+✓ erin caps it at 0.25 NEAR from her full-access key                       accepted: {"cap":"250000000000000000000000","spent":"0"}
+✓ erin's app plays a challenge with the session key: no deposit, no prompt "Lost" · in-game balance 4.997 → 4.881
+✓ the stake (and any winnings) moved the in-game balance; the wallet paid only gas wallet +0.02999 (gas, net of refunds), in-game −0.117 (stake + storage)
+✓ the session key can't withdraw (no deposits on a function-call key)      (DepositWithFunctionCall)]
+✓ …nor without a deposit: withdraw isn't one of the key's methods          (MethodNameMismatch { method_name: "withdraw" })]
+✓ …nor trade a ghost (method not on the key)                               (MethodNameMismatch { method_name: "nft_transfer" })]
+✓ …nor stake erin's money on a ghost naming who may race it (a thief naming himself) choosing who may race your money needs your full-access key: attach 1 yoctoNEAR (a session key can't name challengers)
+✓ the key counts at least what its run took from the balance, storage included spent 0.1342 NEAR; the in-game balance lost 0.1168
+✓ past its cap (erin lowers it to 0.15) the key can't stake again: a thief's limit this key's cap is 0.150 NEAR and it has put 0.134 at risk; this needs 0.120 more
+✓ erin's full-access key withdraws 1 NEAR                                  accepted: null
+
+6. Expiry
+✓ a run can't be expired while it still has time                           the run still has time
+✓ a challenge never submitted expires: bob (the ghost's owner) earns 70% of it bob +0.070
+✓ …counted as a forfeit, not a defence                                     3
+✓ a replay no runner delivers is done on-chain after the timeout, by anyone accepted: "verified: 159 points"
+
+7. Solvency
+✓ free balance (after storage) covers every balance and pot                free 121.156 NEAR, owed 24.686 NEAR, storage 376414 B
+✓ players have paid for storage                                            paid 0.2342 NEAR
+
+contract storage: 376414 bytes; ghosts minted: "2"; settled through OutLayer: [String("Verified"), String("Won")]
+
+All 60 checks passed.

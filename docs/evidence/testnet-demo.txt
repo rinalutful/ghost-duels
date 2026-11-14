@@ -1,0 +1,29 @@
+replay job: res/ghost_replay_job.wasm under wasmtime 50.0.1 (c307ec81d 2026-10-29)
+alice.ghost-duels-jbx5v9.testnet deposits 1.1 NEAR into the game: https://testnet.nearblocks.io/txns/DJrD5tLyHiTUGumaXFzMApLF6xfzji6hojYDojPLNZJY
+bob.ghost-duels-jbx5v9.testnet deposits 1.1 NEAR into the game: https://testnet.nearblocks.io/txns/HSj89kM3vT3jsjuYRSasZsFUoC4SGYt5fzMrNJFtc3Zf
+alice's and bob's apps each hold a session key: only start_run, submit_run, mint_ghost, expire_run; no deposits
+1. alice qualifies and mints a ghost
+  alice started run 1 (seed 623c06f3f260…): https://testnet.nearblocks.io/txns/F9spMVaz881n7wV6HrVYKch9NUmXG1KiweJtriYdMHXH
+  flew 363 points in the browser build; submitted 773 button changes claiming 363: https://testnet.nearblocks.io/txns/B2UCniLH77upomZtJRH8kr1Ytc53qpde7uEQjz91wUXW
+  runner replayed run 1 under wasmtime: score 363, state 80715a1d47fe4081… https://testnet.nearblocks.io/txns/GWPUhowHVVD2goT42Q2vqNzwbBmqEECP61CVp4bAvjM4
+✓ alice's run is verified by the runner's replay                   verified: 363 points · runner runner.ghost-duels-jbx5v9.testnet: the wasip2 job under wasmtime (a trusted runner, not a TEE)
+✓ alice mints ghost #1: 0.5 NEAR pot, 0.1 a challenge              https://testnet.nearblocks.io/txns/7msow7KsHFrcRWaxSSKM4tubURKkxpSpsopXoZWWnnhQ
+✓ it is a NEP-171 token owned by alice                             Ghost #1 · 363 pts
+2. bob challenges the ghost and loses
+  bob started run 2 against ghost #1 (seed f4241159db9b…): https://testnet.nearblocks.io/txns/2BGkQ3rcYkMjCJojqUUizJQPbGs3GezR7eJEgWJffu7B
+  flew 73 points in the browser build; submitted 231 button changes claiming 73: https://testnet.nearblocks.io/txns/HPH5QnVHjCqRvvCr65imiCg17ELv83BZsVm8MX2hVu24
+  runner replayed run 2 under wasmtime: score 73, state e083fee3cc1c9b96… https://testnet.nearblocks.io/txns/EPiPaApjpKM6iyU69s2tj5QSuSfXmbMGFsvpeb7n7hae
+✓ bob's run doesn't beat the ghost                                 ghost #1 held (363 vs 73); the ghost's owner earned 0.10 NEAR
+✓ alice (the ghost's owner) earns 0.095: the 0.1 stake minus the 5% rake +0.095 NEAR
+3. bob challenges again and wins
+  bob started run 3 against ghost #1 (seed bb0b347d0abc…): https://testnet.nearblocks.io/txns/Dfg1MSU8kEoufVSgV1aQK24y4quhj9Rxzx6tFWK8MQaG
+  flew 738 points in the browser build; submitted 1131 button changes claiming 738: https://testnet.nearblocks.io/txns/9YJgajVRj8PjFFBt29VjyWVWiKUrbYR78CTqYKsMgjU2
+  runner replayed run 3 under wasmtime: score 738, state 9e9b2b5cc6a2bf29… https://testnet.nearblocks.io/txns/3eE3RxrjeyPJyYrCVT72sivSdRjHmgHoGzNBmBHNoskD
+✓ bob beats the ghost                                              beat ghost #1 (738 vs 363): won its 0.50 NEAR pot
+✓ bob takes the 0.5 pot (less the 0.01 replay fee and the run's storage) +0.488 NEAR
+✓ ghost #1's record: held 1, beaten 1, pot 0                       earned 0.095 NEAR
+4. bob's winning run becomes the new champion
+✓ bob mints ghost #2 (738 points)                                  https://testnet.nearblocks.io/txns/ErCSGbLxyECyYc246dhkVLPGWQtfQnHBhQBkF29rxnjj
+  ghost #1 as a wallet shows it: A recorded run in Ghost Duels' cave: 313 m, 2 gems. Defended 1 · beaten 1 · earned 0.10 NEAR. Pot 0.00 NEAR, stake 0.10 NEAR; beaten, waiting for a refill.
+contract duels.ghost-duels-jbx5v9.testnet: https://testnet.nearblocks.io/address/duels.ghost-duels-jbx5v9.testnet
+All 9 checks passed.

@@ -1,0 +1,44 @@
+{
+  "name": "near-ghost-duels",
+  "private": true,
+  "workspaces": [
+    "demo",
+    "web"
+  ],
+  "scripts": {
+    "build:wasm": "bash scripts/build-wasm.sh",
+    "killtest": "npm run --silent killtest -w demo",
+    "demo": "npm run --silent demo -w demo --",
+    "cheat": "npm run --silent cheat -w demo --",
+    "runner": "npm run --silent runner -w demo --",
+    "deploy": "npm run --silent deploy -w demo --",
+    "session": "npm run --silent session -w demo --",
+    "sandbox": "bash scripts/sandbox.sh",
+    "web": "npm run dev -w web",
+    "build:web": "npm run build -w web",
+    "outlayer": "npm run --silent outlayer -w demo --",
+    "page-test": "npm run --silent page-test -w demo",
+    "page-e2e": "npm run --silent page-e2e -w demo",
+    "bot": "bash scripts/bot.sh",
+    "record": "npm run --silent record -w demo",
+    "screenshots": "npm run --silent screenshots -w demo --",
+    "reclaim": "npm run --silent reclaim -w demo --",
+    "mutants": "npm run --silent mutants -w demo",
+    "verify": "npm run --silent verify -w demo",
+    "attack": "npm run --silent attack -w demo --",
+    "coreloop": "npm run --silent coreloop -w demo",
+    "judge": "npm run --silent judge -w demo --",
+    "judge:full": "npm run --silent judge -w demo -- --full",
+    "web-rules": "npm run --silent web-rules -w demo",
+    "deploy-v3": "npm run --silent deploy-v3 -w demo --",
+    "deploy-v4": "npm run --silent deploy-v4 -w demo --",
+    "deploy-v5": "npm run --silent deploy-v5 -w demo --",
+    "funder": "npm run --silent funder -w demo --"
+  },
+  "engines": {
+    "node": ">=22.22"
+  },
+  "devDependencies": {
+    "playwright": "^1.64.1"
+  }
+}

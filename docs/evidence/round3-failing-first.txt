@@ -1,0 +1,8 @@
+test tests::attack_owner_cannot_confiscate_a_qualifier_with_its_terms ... FAILED
+test tests::attack_key_cap_counts_losses_not_the_refunded_reserve ... FAILED
+test tests::attack_ghost_with_pot_below_stake_cannot_be_raced ... FAILED
+thread 'tests::attack_owner_cannot_confiscate_a_qualifier_with_its_terms' (30793312) panicked at ghost-duels/src/tests.rs:115:18:
+thread 'tests::attack_key_cap_counts_losses_not_the_refunded_reserve' (30793311) panicked at /Users/walrus/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-sdk-5.29.1/src/environment/mock/mocked_blockchain.rs:205:78:
+thread 'tests::attack_ghost_with_pot_below_stake_cannot_be_raced' (30793310) panicked at ghost-duels/src/tests.rs:115:18:
+test result: FAILED. 0 passed; 3 failed; 0 ignored; 0 measured; 32 filtered out; finished in 0.17s
+error: test failed, to rerun pass `-p ghost-duels --lib`

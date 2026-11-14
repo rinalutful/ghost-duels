@@ -1,0 +1,25 @@
+replay job: res/ghost_replay_job.wasm under wasmtime 50.0.1 (c307ec81d 2026-10-29)
+alice's and bob's apps each hold a session key: only start_run, submit_run, expire_run, refill_ghost; no deposits; at most 1 NEAR at risk each
+setup: alice flies a qualifier; it becomes a ghost
+  alice started run 17 as a qualifier (pot 0.3 NEAR locked before the cave exists) (seed 26e2ee59d3aa…): https://testnet.nearblocks.io/txns/EW5rBYM2ekazUKN83rJUhiz3EYA3w4mstnVGqJrwS1FL
+  flew 389 points in the browser build; submitted 783 button changes claiming 389: https://testnet.nearblocks.io/txns/3ji7un2DVeyCK8xezsYSeQ8GHzDXioyngkr9ViMVHeTe
+  ghost #6: 389 points, pot 0.3 NEAR
+1. an edited score
+  bob started run 18 against ghost #6 (seed 5b8a31a434f8…): https://testnet.nearblocks.io/txns/J6xiM1dLEgaisPZg7wTq2KeAuVPHVEhs28fKiR57MeHF
+  flew 73 points in the browser build; submitted 219 button changes claiming 489: https://testnet.nearblocks.io/txns/5T7qJWD8MEh682ydtd24VZEpx5DFWrXzv7BH36Zk2xNi
+✓ bob flies 73 and claims 489: refused                             refused: claimed 489, but the replay of the submitted inputs scores 73; the ghost's owner earned 0.035 NEAR and its pot grew 0.013
+✓ …his stake is kept (a forfeit, not a defence); the pot only grows 
+2. the champion's inputs, copied onto another cave
+  bob started run 19 against ghost #6 (seed 62e5472a649c…): https://testnet.nearblocks.io/txns/9JR1wkubkysm62CCCtbgjVirNSfBSvFayp2sv9fZCMq1
+  flew 73 points in the browser build; submitted 783 button changes claiming 390: https://testnet.nearblocks.io/txns/EuLnvsUFZi2xgERPQdaT79WFXTWbeeDRBwkupHoMPJbN
+✓ bob submits ghost #6's 783 button changes claiming 390: refused  refused: claimed 390, but the replay of the submitted inputs scores 363; the ghost's owner earned 0.035 NEAR and its pot grew 0.013
+3. a malformed log, someone else's run, a fake runner
+✓ a log whose ticks go backwards is refused at submit              the input log's ticks must strictly increase
+✓ alice can't submit bob's run                                     not your run
+✓ alice posing as a runner (a made-up 9999) is refused             replays come from a runner only in Runner mode
+4. the session key moving money
+✓ bob's app can't withdraw (a function-call key attaches no deposit) InvalidTxError
+✓ …nor call a method outside the game's (nft_transfer)             InvalidTxError
+✓ …nor put more at risk than the cap bob set for it (0.3 NEAR)     this key's cap is 0.300 NEAR and it has put 0.168 at risk; this needs 0.644 more
+contract v3.gd-v2-59lavk.testnet: https://testnet.nearblocks.io/address/v3.gd-v2-59lavk.testnet
+All 9 cheats refused.

@@ -1,0 +1,42 @@
+✓ caught    1. an edited score is accepted (claim not compared with the replay)   by edited_score_is_refused_and_forfeits
+✓ caught    2. an owner may challenge their own ghost                             by cannot_challenge_own_ghost
+✓ caught    3. a settled challenge stays counted as racing (retire blocked forever) by concurrent_challengers_pot_paid_once
+✓ caught    4. a session key spends past its cap                                  by attack_stolen_session_key_is_capped
+✓ caught    5. any deposit counts as a full-access key                            by attack_stolen_session_key_is_capped
+✓ caught    6. a kept stake doesn't grow the pot                                  by challenger_loses_stake_is_split_rake_pot_owner
+✓ caught    7. a ghost's pot can be retired at once                               by attack_best_of_n_minting_costs_every_try
+✓ caught    8. a failed qualifier costs nothing                                   by attack_best_of_n_minting_costs_every_try
+✓ caught    9. a runner's replay of another log is accepted                       by runner_mode_checks_runner_and_log_hash
+✓ caught   10. anyone can hand in a replay                                        by runner_mode_checks_runner_and_log_hash
+✓ caught   11. a run is submitted after its deadline                              by late_submit_refused
+✓ caught   12. a first deposit doesn't pay for its storage                        by property_ledger_conserved_and_storage_covered_on_chain, property_ledger_conserved_and_storage_covered_runner
+✓ caught   13. settlement's storage isn't charged at all                          by property_ledger_conserved_and_storage_covered_on_chain, property_ledger_conserved_and_storage_covered_runner
+✓ caught   14. a failed OutLayer call keeps the player's fee                      by attack_failed_outlayer_call_refunds_the_fee
+✓ caught   15. ghost ids past u32 alias (a truncating cast)                       by attack_ghost_ids_past_u32_dont_alias
+✓ caught   16. the replay fee has no cap                                          by attack_owner_powers_are_bounded
+✓ caught   17. a winner leaves the pot in the ghost                               by beaten_ghost_needs_refill
+✓ caught   18. anyone can transfer a ghost                                        by only_owner_transfers
+✓ caught   19. a refill grows a cheap ghost's pot past what it qualified with     by attack_cheap_qualifier_then_refill_is_refused
+✓ caught   20. retiring gives the owner back the pot share of faked defences      by attack_wash_trade_near_misses_cost_what_the_record_says
+✓ caught   21. a session key's runs don't count their own storage against its cap by attack_key_cap_counts_ghost_log_and_settlement_storage
+✓ caught   22. the owner sets any minimum score                                   by attack_owner_cannot_confiscate_a_qualifier_with_its_terms
+✓ caught   23. a qualifier's stated maximum terms are ignored                     by attack_owner_cannot_confiscate_a_qualifier_with_its_terms
+✓ caught   24. a ghost whose pot is below its stake can be raced                  by attack_ghost_with_pot_below_stake_cannot_be_raced
+✓ caught   25. the refundable reserve stays counted against a key's cap after settlement by attack_key_cap_counts_ghost_log_and_settlement_storage, attack_key_cap_counts_losses_not_the_refunded_reserve
+✓ caught   26. an on-chain-only deploy can be switched to a runner                by attack_on_chain_only_deploy_refuses_offchain_replayers
+✓ caught   27. a qualifier is judged by the owner's current minimum score         by attack_owner_cannot_change_a_qualifier_mid_run
+✓ caught   28. a stranger may race a private duel                                 by attack_guest_sybils_cannot_reach_staked_play, attack_stranger_cannot_race_a_private_duel
+✓ caught   29. a session key may name who races the account's money               by attack_guest_sybils_cannot_reach_staked_play, attack_mutual_choice_bypasses_are_refused
+✓ caught   30. a staked ghost may be open to anyone (no challengers named)        by attack_guest_sybils_cannot_reach_staked_play, attack_mutual_choice_bypasses_are_refused
+✓ caught   31. anyone may set a ghost's challengers                               by attack_mutual_choice_bypasses_are_refused
+✓ caught   32. a session key may set a ghost's challengers                        by attack_mutual_choice_bypasses_are_refused
+✓ caught   33. a qualifier's ghost-log storage isn't counted on the key (the judges' bug) by attack_key_cap_counts_ghost_log_and_settlement_storage
+✓ caught   34. settlement's storage isn't counted on the key (the judges' bug)    by attack_key_cap_counts_ghost_log_and_settlement_storage
+✓ caught   35. a run's reserve isn't held on its key while in flight (charged only at settlement) by attack_key_cap_counts_ghost_log_and_settlement_storage, property_a_session_key_never_loses_more_than_its_cap
+✓ caught   36. the page hides a ghost someone is racing                           by a ghost someone is racing is still open to race
+✓ caught   37. the page's start_run leaves out max_fee                            by start_run always carries max_fee, at the fee the page showed
+✓ caught   38. a hidden tab doesn't end a real run                                by a real run ends itself before the 90 s deadline, and when the tab is hidden
+✓ caught   39. the page offers a duel for real to an account its owner didn't name by a duel is raced for real only by the players its owner named; the ladder by anyone but its owner
+✓ caught   40. the page names a duel's challengers with the session key (no 1 yoctoNEAR) by flying for a ghost: the ladder stakes nothing; a duel names 1-16 others, pot ≥ stake, signed with the full-access key
+
+40/40 mutants caught (57 s)

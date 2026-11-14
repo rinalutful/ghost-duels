@@ -1,0 +1,65 @@
+found 0 vulnerabilities
+
+> judge:full
+> npm run --silent judge -w demo -- --full
+
+Ghost Duels' judge run (full): free, no keys. It reads testnet (public RPC) and nothing else leaves this machine.
+Expect: All 20 core-loop checks passed. · 43 passed · 27 refused, 3 priced · 6 passed · 16 passed · web/dist · All 12 checks passed. · PASS: 47/47 identical · 42/42 mutants caught · All 60 checks passed. · All 38 page checks passed.
+
+✓ Core loop on the committed wasm (NEAR host for Node): stake, replay, payout, refusals, the cap, the books: All 20 core-loop checks passed. (0 s)
+    ✓ start_run locks alice's 0.5 NEAR pot and only then draws the cave's seed       alice −0.5229 (pot, reserve, storage)
+    ✓ submit_run sends button changes; the contract replays them and mints the ghost in the same call 747 changes → 363 po
+    ✓ the ghost is a NEP-171 token alice owns, holding the pot and naming bob        ghost #1: pot 0.5000, stake 0.1000
+    ✓ carol, whom alice didn't name, can't race the duel                             this ghost is a private duel and its
+    ✓ bob claims 500 points more than he flew: refused by the replay, and the stake is forfeited refused: claimed 558, but
+    ✓ a log whose ticks go backwards is refused (the run stays open)                 the input log's ticks must strictly i
+    ✓ …and after its 90 s deadline the same run can't be submitted                   too late: the run expired
+    ✓ anyone closes the run that ran out of time: a forfeit                          not submitted in time; the ghost's ow
+    ✓ bob falls short: his 0.1 stake goes 70% to alice, 25% into the pot, 5% to the house, exactly ghost #1 held (363 vs 5
+    ✓ bob beats the ghost's score: the contract pays him its whole pot in the same call beat ghost #1 (501 vs 363): won it
+    ✓ a beaten ghost can't be raced until its owner refills it                       this ghost has no pot (it was beaten)
+    ✓ bob's session key, with no cap set, can't stake                                this key has no spending cap: set one
+    ✓ capped at 0.15 NEAR it races with no deposit and no prompt; the key counts what the run cost Lost; the key has spent
+    ✓ …a second 0.1 stake would pass the cap: refused                                this key's cap is 0.150 NEAR and it h
+    ✓ the session key can't name who races bob's money (a duel qualifier needs the full-access key) choosing who may race
+    ✓ …and can't withdraw: that needs 1 yoctoNEAR, which only a full-access key can attach Requires attached deposit of ex
+    ✓ bob's full-access key withdraws 1 NEAR: the contract schedules the transfer to bob transfer of 1.0000 NEAR to bob.te
+    ✓ alice-alt, whom nobody named, races carol's ladder ghost; carol and the house get nothing public-ladder ghost #2 hel
+    ✓ NOT refused on v4: alice names her second account mid-race, it wins, and bob, who also won, gets only his stake back
+    ✓ balances + pots + storage paid = deposits − withdrawals, to the yocto, with no run in flight 10.8824 + 0.1176 = 12.0
+✓ Page rules (who may race what, the duel form, links, chain data) and the verifier's own rules: 16 passed (0 s)
+✓ Web app builds (tsc + vite): web/dist (2 s)
+✓ Testnet: v4 runs the committed wasm, no keys; ghosts replay; v1-v3 untouched: All 12 checks passed. (5 s)
+Rust: checking the pinned toolchain (rustup fetches 1.93.0 on first use, about half a minute)…
+Rust: 1.93.0-aarch64-apple-darwin (overridden by '/Users/walrus/dev/podium/near-ghost-duels-polish/contracts/rust-toolchain.toml')
+Building and running the contract's tests: the long step (near-sdk's test dependencies compile first; 2 to 6 minutes on 2 CPUs).
+✓ Contract unit tests (v4 source): 3 property tests, 1 stated limit: 43 passed (5 s)
+✓ Attack suite: 30 attacks, each refused or priced as its test asserts: 27 refused, 3 priced (0 s)
+✓ Sim unit tests (the deterministic game): 6 passed (0 s)
+✓ Kill test: browser build = wasip2 replay job, byte for byte: PASS: 47/47 identical (1 s)
+✓ Mutation checks: each security check broken, a test catches it: 42/42 mutants caught (68 s)
+✓ Sandbox suite on a local NEAR node (Linux: glibc 2.38+): All 60 checks passed. (66 s)
+- The game in headless Chromium: skipped, no Chromium: npx playwright install --with-deps chromium-headless-shell
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      step                                                                                                       got                       expected
+PASS  Core loop on the committed wasm (NEAR host for Node): stake, replay, payout, refusals, the cap, the books  All 20 core-loop checks p All 20 core-loop checks passed.
+PASS  Contract unit tests (v4 source): 3 property tests, 1 stated limit                                          43 passed                 43 passed
+PASS  Attack suite: 30 attacks, each refused or priced as its test asserts                                       27 refused, 3 priced      27 refused, 3 priced
+PASS  Sim unit tests (the deterministic game)                                                                    6 passed                  6 passed
+PASS  Page rules (who may race what, the duel form, links, chain data) and the verifier's own rules              16 passed                 16 passed
+PASS  Web app builds (tsc + vite)                                                                                web/dist                  web/dist
+PASS  Testnet: v4 runs the committed wasm, no keys; ghosts replay; v1-v3 untouched                               All 12 checks passed.     All 12 checks passed.
+PASS  Kill test: browser build = wasip2 replay job, byte for byte                                                PASS: 47/47 identical     PASS: 47/47 identical
+PASS  Mutation checks: each security check broken, a test catches it                                             42/42 mutants caught      42/42 mutants caught
+PASS  Sandbox suite on a local NEAR node (Linux: glibc 2.38+)                                                    All 60 checks passed.     All 60 checks passed.
+SKIP  The game in headless Chromium                                                                              no Chromium: npx playwrig All 38 page checks passed.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+10 passed, 0 failed, 1 skipped, in 149 s
+real 149.31
+user 159.49
+sys 24.31
+
+# The page test was skipped in the run above: that machine had no Chromium for Playwright at the time.
+# Run separately on Linux (headless Chromium) for the same commit: npm run build:web && npm run page-test
+All 38 page checks passed.

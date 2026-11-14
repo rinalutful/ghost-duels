@@ -1,0 +1,38 @@
+
+> page-test
+> npm run --silent page-test -w demo
+
+
+desktop, testnet RPC blocked
+✓ the title screen draws (not a black canvas)                        0% black, 315 colours
+✓ the title's buttons are inside the game frame                      2 buttons
+✓ the page doesn't scroll sideways                                   
+✓ Practice starts and the sim advances                               tick 180, 45 pts
+✓ …drawing the cave (not a black canvas)                             0% black, 434 colours
+✓ the run ends with a result                                         CRASHED 131 points · 106 m · 1 gems Fly again Back
+✓ no console errors                                                  
+
+phone 390 px, testnet RPC blocked
+✓ the title screen draws (not a black canvas)                        0% black, 342 colours
+✓ the title's buttons are inside the game frame                      2 buttons
+✓ the page doesn't scroll sideways                                   
+✓ Practice starts and the sim advances                               tick 180, 70 pts
+✓ …drawing the cave (not a black canvas)                             0% black, 430 colours
+✓ the run ends with a result                                         CRASHED 120 points · 95 m · 1 gems Fly again Back
+✓ no console errors                                                  
+
+desktop, live testnet RPC
+✓ the title screen draws (not a black canvas)                        0% black, 360 colours
+✓ the title's buttons are inside the game frame                      3 buttons
+✓ the page doesn't scroll sideways                                   
+✓ Practice starts and the sim advances                               tick 180, 45 pts
+✓ …drawing the cave (not a black canvas)                             0% black, 453 colours
+✓ the run ends with a result                                         CRASHED 100 points · 100 m · 0 gems Now race a ghost: #2 fle
+✓ the ghost list reads the deployed contract, v4                     v4.near-ghost-duels-rywu8u.testnet · 12 ghosts: 10 private duels, 2 on the public ladder
+✓ …in groups: the public ladder, other players' duels                The public ladder | Other players' duels
+✓ a visitor is offered Play for real (a guest account), and nothing more Practice is free and needs nothing. To race for real, press 
+✓ a stranger gets only a practice race against a duel                Practice race, Watch
+✓ Watch re-flies a ghost and matches its on-chain score and log hash REPLAYED IN THIS BROWSER GHOST #6 This page re-flew its 767 recorded b
+✓ no console errors                                                  
+
+All 26 page checks passed.

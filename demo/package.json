@@ -1,0 +1,36 @@
+{
+  "name": "near-ghost-duels-demo",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.22"
+  },
+  "scripts": {
+    "killtest": "tsx killtest.ts",
+    "demo": "tsx demo.ts",
+    "cheat": "tsx cheat.ts",
+    "runner": "tsx runner.ts",
+    "deploy": "tsx deploy.ts",
+    "session": "tsx session.ts",
+    "outlayer": "tsx outlayer.ts",
+    "page-test": "tsx page-test.ts",
+    "page-e2e": "tsx page-e2e.ts",
+    "record": "tsx record.ts",
+    "screenshots": "tsx screenshots.ts",
+    "reclaim": "tsx reclaim.ts",
+    "mutants": "tsx mutants.ts",
+    "verify": "tsx verify.ts",
+    "attack": "tsx attack.ts",
+    "coreloop": "tsx coreloop.ts",
+    "judge": "tsx judge.ts",
+    "web-rules": "tsx --test web-rules.test.ts verify-rules.test.ts",
+    "deploy-v3": "tsx deploy-v3.ts",
+    "deploy-v4": "tsx deploy-v4.ts",
+    "deploy-v5": "tsx deploy-v5.ts",
+    "funder": "tsx funder.ts"
+  },
+  "dependencies": {
+    "near-api-js": "7.4.0",
+    "tsx": "4.23.15"
+  }
+}

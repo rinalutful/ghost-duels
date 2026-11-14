@@ -1,0 +1,6 @@
+[toolchain]
+# Pinned: res/ghost_duels.wasm (v4, deployed) is this toolchain's build. A minimal profile (no clippy,
+# no rustfmt: `rustup component add` them to develop; scripts/build-wasm.sh adds the wasm32 target it
+# needs) keeps a judge's first download small.
+channel = "1.93.0"
+profile = "minimal"

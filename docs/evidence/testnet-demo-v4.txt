@@ -1,0 +1,47 @@
+
+> demo
+> npm run --silent demo -w demo -- --shared
+
+replay job for Runner-mode deploys: res/ghost_replay_job.wasm under wasmtime: not installed (not needed: the contract replays on-chain)
+near-ghost-duels-rywu8u.testnet topped up alice.near-ghost-duels-rywu8u.testnet with 1.4 NEAR
+alice.near-ghost-duels-rywu8u.testnet deposits 1.1 NEAR into the game: https://testnet.nearblocks.io/txns/2vQMPxtrrq4kCxUPVFKDuLP8HxKgjgrP12Rs9NC6N1pC
+alice's and bob's apps each hold a session key: only start_run, submit_run, expire_run, refill_ghost; no deposits; at most 1 NEAR at risk each
+
+1. alice flies a qualifier for a private duel with bob; it becomes a ghost
+  alice started run 11 as a qualifier for a private duel with bob (pot 0.5 NEAR locked before the cave exists) (seed 04067395e399…): https://testnet.nearblocks.io/txns/HkxtN3VbnY6jt1Wo7Bb4wgxtmZgpE5PMncXmMDcLrzMc
+  flew 363 points in the browser build; submitted 739 button changes claiming 363: https://testnet.nearblocks.io/txns/6jMSrTyrRmKZTC2XYfEPaTtKKkUZbh6FX8Uw5dE5igiB
+✓ the contract's replay verifies it and mints it in the same transaction 363 points: minted as ghost #5 with a 0.500 NEAR pot · on-chain: this contract replayed the log
+✓ ghost #5 is a NEP-171 token owned by alice, naming bob           Ghost #5 · 363 pts
+
+2. an account alice didn't name tries to race it
+✓ near-ghost-duels-rywu8u is refused: a private duel               this ghost is a private duel and its owner hasn't named you: staked races are only between players who chose each other (race a public-ladder ghost for free)
+
+3. bob challenges the ghost and loses
+  bob started run 12 against ghost #5 (seed fa2558797f3a…): https://testnet.nearblocks.io/txns/8j85UW9ity512B3Y5EXXqFufRejpzTkcV2KmEasFvJzi
+  flew 73 points in the browser build; submitted 223 button changes claiming 73: https://testnet.nearblocks.io/txns/HjPSNjcnxhE3nPr6gDqriW4LH2Ki6NbFDsg6MRFhJVhA
+✓ bob's run doesn't beat the ghost                                 ghost #5 held (363 vs 73); the ghost's owner earned 0.070 NEAR and its pot grew 0.025
+✓ his 0.1 stake splits: alice 0.07, the house 0.005, the pot +0.025 alice +0.07 NEAR, house +0.005 NEAR, pot 0.525 NEAR
+
+4. bob challenges again and wins
+  bob started run 13 against ghost #5 (seed a5a5f2b63dbe…): https://testnet.nearblocks.io/txns/HZfPREsDGH4dHmBwyxCLk69bxUM3v6QaRUSBWticBrPa
+  flew 950 points in the browser build; submitted 1273 button changes claiming 950: https://testnet.nearblocks.io/txns/EtJpPmyYZcnJL5dwV53Fp935AJWiwqBpYVzAjKtC8rbq
+✓ bob beats the ghost                                              beat ghost #5 (950 vs 363): won its 0.525 NEAR pot
+✓ bob takes the 0.525 pot (less the run's storage)                 +0.519 NEAR
+✓ ghost #5's record: defended 1, beaten 1, pot 0                   earned 0.07 NEAR, raked 0.005 NEAR
+  as a wallet shows it: A recorded run in Ghost Duels' cave: 313 m, 2 gems. Defended 1 (best losing challenge 73) · forfeits 0 · beaten 1. Earned its owners 0.070 NEAR; kept stakes grew its pot 0.025 NEAR and paid the house 0.005 NEAR. A defence can be faked from a second account, and a challenger can be its owner's: the record proves runs were flown and paid for, not who flew them. Pot 0.000 NEAR, stake 0.100 NEAR; a private duel: only the 1 challengers its owner named may race it; beaten, waiting for a refill.
+
+5. the public ladder: no pot, no stake, anyone races, no money moves
+  bob started run 14 as a public-ladder qualifier (no pot, no stake) (seed 3c9de3fd520c…): https://testnet.nearblocks.io/txns/DdSGsReb2ANhCRX2GM1bwoJhLuuc6W8YTvPp9Lz4vrVy
+  flew 415 points in the browser build; submitted 767 button changes claiming 415: https://testnet.nearblocks.io/txns/4bB7jUJtsREaofJbwr8cSFhEKuGekCD2FLwwxA52D4uP
+✓ bob's app flies a public-ladder ghost, #6 (a session key may: there's no money in it) 415 points: minted as ghost #6 with a 0.000 NEAR pot
+  alice started run 15 against ghost #6 (seed 9a2921510534…): https://testnet.nearblocks.io/txns/EvUz3w43nXf4xfqf9GEggXB4fpMgbN9AKU13kf76iH3B
+  flew 363 points in the browser build; submitted 749 button changes claiming 363: https://testnet.nearblocks.io/txns/7pBHnZp74Cv5unZmCvMLafDwrjeDManhZjfVjEp5862S
+✓ alice's app races it; the record counts and no money moves       public-ladder ghost #6 held (415 vs 363); no money moves on the public ladder
+
+6. bob flies a private duel of his own, naming alice: the new champion
+  bob started run 16 as a qualifier for a private duel with alice (pot 0.3 NEAR locked before the cave exists) (seed 5d7ec9dfa6c1…): https://testnet.nearblocks.io/txns/BUJn27R2HqxxJEcrcE5PzGrpNTnSRmFEUg4CWQa2LCPY
+  flew 664 points in the browser build; submitted 1073 button changes claiming 664: https://testnet.nearblocks.io/txns/HQrZkqVfwiP3aeiw2jTqgRKEKKM4Wzb9tYDXgvPsA4NL
+✓ bob's qualifier becomes ghost #7 (664 points)                    664 points: minted as ghost #7 with a 0.300 NEAR pot
+
+contract v4.near-ghost-duels-rywu8u.testnet: https://testnet.nearblocks.io/address/v4.near-ghost-duels-rywu8u.testnet
+All 11 checks passed.

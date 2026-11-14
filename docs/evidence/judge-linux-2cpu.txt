@@ -1,0 +1,42 @@
+0b3c699 Page e2e on v4: a browser-made guest races a duel from its invite link, flies its own, names challengers, gives the ghost away, races the ladder, cashes out (11/11, #5 #22); judge runs the page and testnet steps while Rust builds; the pinned toolchain no longer downloads the wasm target for tests
+v22.23.4
+
+added 96 packages in 5s
+
+> judge
+> npm run --silent judge -w demo --
+
+Ghost Duels' judge run: free, no keys. It reads testnet (public RPC) and nothing else leaves this machine.
+Expect: 42 passed · 30/30 attacks refused · 6 passed · 6 passed · web/dist · All 12 checks passed.
+
+Rust: 1.93.0-x86_64-unknown-linux-gnu (overridden by '/tmp/gd/contracts/rust-toolchain.toml')
+✓ Contract unit tests (v4 source), incl. 3 property tests: 42 passed (155 s)
+✓ Attack suite: each attack and the contract's answer: 30/30 attacks refused (1 s)
+✓ Sim unit tests (the deterministic game): 6 passed (0 s)
+✓ Page rules: who may race what, the duel form, invite links, max_fee, the deadline guard: 6 passed (24 s)
+✓ Web app builds (tsc + vite): web/dist (1 s)
+✓ Testnet: v4 runs this source's wasm, no keys; ghosts replay; v1-v3 untouched: All 12 checks passed. (6 s)
+
+Not run here (npm run judge:full runs the first four; recorded in docs/evidence/):
+  npm run killtest   PASS: 47/47 identical (needs wasmtime)
+  npm run mutants    40/40 mutants caught (Rust, a few minutes)
+  npm run sandbox    All 60 checks passed (a local NEAR node; Linux needs glibc 2.38+)
+  npm run page-test  All 26 page checks passed (headless Chromium)
+  npm run demo       All 11 checks passed (testnet, one faucet account)
+  npm run cheat      All 11 cheats refused (testnet, one faucet account)
+  npm run bot        a bot that sees only the screen: median 2461; the human model: 281
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+      step                                                                                     got                       expected
+PASS  Contract unit tests (v4 source), incl. 3 property tests                                  42 passed                 42 passed
+PASS  Attack suite: each attack and the contract's answer                                      30/30 attacks refused     30/30 attacks refused
+PASS  Sim unit tests (the deterministic game)                                                  6 passed                  6 passed
+PASS  Page rules: who may race what, the duel form, invite links, max_fee, the deadline guard  6 passed                  6 passed
+PASS  Web app builds (tsc + vite)                                                              web/dist                  web/dist
+PASS  Testnet: v4 runs this source's wasm, no keys; ghosts replay; v1-v3 untouched             All 12 checks passed.     All 12 checks passed.
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+6 passed, 0 failed, 0 skipped, in 179 s
+
+real	3m4.420s
+user	4m32.264s
+sys	0m31.877s

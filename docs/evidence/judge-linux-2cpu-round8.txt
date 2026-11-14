@@ -1,0 +1,55 @@
+found 0 vulnerabilities
+npm ci: 4s
+
+> judge
+> npm run --silent judge -w demo --
+
+Ghost Duels' judge run: free, no keys. It reads testnet (public RPC) and nothing else leaves this machine.
+Expect: All 20 core-loop checks passed. · 16 passed · web/dist · All 12 checks passed.
+
+✓ Core loop on the committed wasm (NEAR host for Node): stake, replay, payout, refusals, the cap, the books: All 20 core-loop checks passed. (1 s)
+    ✓ start_run locks alice's 0.5 NEAR pot and only then draws the cave's seed       alice −0.5229 (pot, reserve, storage)
+    ✓ submit_run sends button changes; the contract replays them and mints the ghost in the same call 747 changes → 363 po
+    ✓ the ghost is a NEP-171 token alice owns, holding the pot and naming bob        ghost #1: pot 0.5000, stake 0.1000
+    ✓ carol, whom alice didn't name, can't race the duel                             this ghost is a private duel and its
+    ✓ bob claims 500 points more than he flew: refused by the replay, and the stake is forfeited refused: claimed 558, but
+    ✓ a log whose ticks go backwards is refused (the run stays open)                 the input log's ticks must strictly i
+    ✓ …and after its 90 s deadline the same run can't be submitted                   too late: the run expired
+    ✓ anyone closes the run that ran out of time: a forfeit                          not submitted in time; the ghost's ow
+    ✓ bob falls short: his 0.1 stake goes 70% to alice, 25% into the pot, 5% to the house, exactly ghost #1 held (363 vs 5
+    ✓ bob beats the ghost's score: the contract pays him its whole pot in the same call beat ghost #1 (501 vs 363): won it
+    ✓ a beaten ghost can't be raced until its owner refills it                       this ghost has no pot (it was beaten)
+    ✓ bob's session key, with no cap set, can't stake                                this key has no spending cap: set one
+    ✓ capped at 0.15 NEAR it races with no deposit and no prompt; the key counts what the run cost Lost; the key has spent
+    ✓ …a second 0.1 stake would pass the cap: refused                                this key's cap is 0.150 NEAR and it h
+    ✓ the session key can't name who races bob's money (a duel qualifier needs the full-access key) choosing who may race
+    ✓ …and can't withdraw: that needs 1 yoctoNEAR, which only a full-access key can attach Requires attached deposit of ex
+    ✓ bob's full-access key withdraws 1 NEAR: the contract schedules the transfer to bob transfer of 1.0000 NEAR to bob.te
+    ✓ alice-alt, whom nobody named, races carol's ladder ghost; carol and the house get nothing public-ladder ghost #2 hel
+    ✓ NOT refused on v4: alice names her second account mid-race, it wins, and bob, who also won, gets only his stake back
+    ✓ balances + pots + storage paid = deposits − withdrawals, to the yocto, with no run in flight 10.8824 + 0.1176 = 12.0
+✓ Page rules (who may race what, the duel form, links, chain data) and the verifier's own rules: 16 passed (1 s)
+✓ Web app builds (tsc + vite): web/dist (1 s)
+✓ Testnet: v4 runs the committed wasm, no keys; ghosts replay; v1-v3 untouched: All 12 checks passed. (7 s)
+
+NOT run here. npm run judge:full runs the first seven; their last recorded results (docs/evidence/judge-full-mac-round8.txt):
+  cargo test (the contract's unit tests, incl. the property tests)  43 passed (Rust; near-sdk's test runtime takes about 3 minutes to build on 2 CPUs)
+  npm run attack     27 refused, 3 priced (the attack table, from the same Rust run)
+  cargo test (sim)   6 passed (Rust)
+  npm run killtest   PASS: 47/47 identical (needs wasmtime)
+  npm run mutants    42/42 mutants caught (Rust, a few minutes)
+  npm run sandbox    All 60 checks passed (a local NEAR node; Linux needs glibc 2.38+)
+  npm run page-test  All 38 page checks passed (headless Chromium)
+  npm run demo       All 11 checks passed (testnet, one faucet account)
+  npm run cheat      All 11 cheats refused (testnet, one faucet account)
+  npm run bot        a bot that sees only the screen: median 2461; the human model: 281
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      step                                                                                                       got                       expected
+PASS  Core loop on the committed wasm (NEAR host for Node): stake, replay, payout, refusals, the cap, the books  All 20 core-loop checks p All 20 core-loop checks passed.
+PASS  Page rules (who may race what, the duel form, links, chain data) and the verifier's own rules              16 passed                 16 passed
+PASS  Web app builds (tsc + vite)                                                                                web/dist                  web/dist
+PASS  Testnet: v4 runs the committed wasm, no keys; ghosts replay; v1-v3 untouched                               All 12 checks passed.     All 12 checks passed.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4 passed, 0 failed, 0 skipped, in 9 s
+judge: 10s total: 14s

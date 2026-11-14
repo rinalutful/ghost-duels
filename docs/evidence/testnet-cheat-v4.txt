@@ -1,0 +1,40 @@
+
+> cheat
+> npm run --silent cheat -w demo -- --shared
+
+replay job for Runner-mode deploys: res/ghost_replay_job.wasm under wasmtime: not installed (not needed: the contract replays on-chain)
+alice's and bob's apps each hold a session key: only start_run, submit_run, expire_run, refill_ghost; no deposits; at most 1 NEAR at risk each
+
+setup: alice flies a qualifier; it becomes a ghost
+  alice started run 7 as a qualifier for a private duel with bob (pot 0.3 NEAR locked before the cave exists) (seed cba38ae8f82d…): https://testnet.nearblocks.io/txns/9m6s2Bc4eJqzGdsCwrFh29tKDMQyTDQVdyPoN7ptWGzV
+  flew 436 points in the browser build; submitted 725 button changes claiming 436: https://testnet.nearblocks.io/txns/FMc8SrELxz1ANU9fthXnwSWN3csj1djCfkz2rRu2zPDX
+  ghost #4: 436 points, pot 0.3 NEAR
+
+1. an edited score
+  bob started run 8 against ghost #4 (seed f20103118ddd…): https://testnet.nearblocks.io/txns/JBZy6Y2h6PgX4kRwBKRkVKDsWhMxawbeTTcp9qzMsWZS
+  flew 73 points in the browser build; submitted 213 button changes claiming 536: https://testnet.nearblocks.io/txns/7p7ex3TJRDhhi1QYaceUeY34winsC657CSiHZ8Z1vfjh
+✓ bob flies 73 and claims 536: refused                             refused: claimed 536, but the replay of the submitted inputs scores 73; the ghost's owner earned 0.035 NEAR and its pot grew 0.013
+✓ …his stake is kept (a forfeit, not a defence); the pot only grows 
+
+2. the champion's inputs, copied onto another cave
+  bob started run 9 against ghost #4 (seed 36981a470cc7…): https://testnet.nearblocks.io/txns/3qYjXDnCYYCsEtDGSUoarZZbYEeWF9XiAYBYzz4PHmn9
+  flew 98 points in the browser build; submitted 725 button changes claiming 437: https://testnet.nearblocks.io/txns/6PJ6uxMsEGXhmPZCh6BsJXP9F75mZdGgC5zGYVJuE9tZ
+✓ bob submits ghost #4's 725 button changes claiming 437: refused  refused: claimed 437, but the replay of the submitted inputs scores 226; the ghost's owner earned 0.035 NEAR and its pot grew 0.013
+
+3. a malformed log, someone else's run, a fake runner
+✓ a log whose ticks go backwards is refused at submit              the input log's ticks must strictly increase
+✓ alice can't submit bob's run                                     not your run
+✓ alice posing as a runner (a made-up 9999) is refused             replays come from a runner only in Runner mode
+
+4. the session key moving money
+✓ bob's app can't withdraw (a function-call key attaches no deposit) InvalidTxError
+✓ …nor call a method outside the game's (nft_transfer)             InvalidTxError
+✓ …nor stake bob's money on a ghost naming who may race it (a thief would name himself) choosing who may race your money needs your full-access key: attach 1 yoctoNEAR (a session key can't name challengers)
+✓ …nor stake past the cap bob set for it (0.148 NEAR)              this key's cap is 0.148 NEAR and it has put 0.118 at risk; this needs 0.060 more
+
+5. an account alice never named races her ghost
+✓ near-ghost-duels-rywu8u is refused: staked play is a private duel this ghost is a private duel and its owner hasn't named you: staked races are only between players who chose each other (race a public-ladder ghost for free)
+
+contract v4.near-ghost-duels-rywu8u.testnet: https://testnet.nearblocks.io/address/v4.near-ghost-duels-rywu8u.testnet
+
+All 11 cheats refused.

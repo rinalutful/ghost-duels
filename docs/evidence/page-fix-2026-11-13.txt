@@ -1,0 +1,61 @@
+# podium-polish after the page fix (the title never over a started run; min_pot), macOS, 2026-11-13.
+# The contract source and its build are unchanged on this branch, so the 35 contract mutants and the
+# Rust suites were not rerun (judge-full-mac-round8.txt). Rerun here: the page test and the 8 page mutants.
+
+$ npm run build:web && npm run page-test
+desktop, testnet RPC blocked
+✓ the title screen draws (not a black canvas)                        0% black, 347 colours
+✓ the title's buttons are inside the game frame                      2 buttons
+✓ the page doesn't scroll sideways                                   
+✓ the page says you fly a cave of your own, and the ghost isn't in it You get a fresh cave of yours, and the ghost flies beside you at the p
+✓ no sound, and no audio context, before the visitor's first input   {"muted":false,"context":"none","played":0}
+✓ Practice starts and the sim advances                               tick 180, 70 pts
+✓ …drawing the cave (not a black canvas)                             0% black, 411 colours
+✓ …and a board refresh that lands mid-run leaves the run on screen (no title card over it) overlay: title hidden
+✓ the run ends with a result                                         CRASHED 138 points · 113 m · 1 gems Fly again Back
+✓ sound starts with the first input: the countdown and the crash were played {"muted":false,"context":"running","played":8}
+✓ the sound button mutes and unmutes, and says which                 Sound: off → Sound: on
+✓ no console errors                                                  
+phone 390 px, testnet RPC blocked
+✓ the title screen draws (not a black canvas)                        0% black, 318 colours
+✓ the title's buttons are inside the game frame                      2 buttons
+✓ the page doesn't scroll sideways                                   
+✓ the page says you fly a cave of your own, and the ghost isn't in it You get a fresh cave of yours, and the ghost flies beside you at the p
+✓ no sound, and no audio context, before the visitor's first input   {"muted":false,"context":"none","played":0}
+✓ Practice starts and the sim advances                               tick 180, 45 pts
+✓ …drawing the cave (not a black canvas)                             0% black, 474 colours
+✓ …and a board refresh that lands mid-run leaves the run on screen (no title card over it) overlay: title hidden
+✓ the run ends with a result                                         CRASHED 120 points · 95 m · 1 gems Fly again Back
+✓ sound starts with the first input: the countdown and the crash were played {"muted":false,"context":"running","played":8}
+✓ the sound button mutes and unmutes, and says which                 Sound: off → Sound: on
+✓ no console errors                                                  
+desktop, live testnet RPC
+✓ the title screen draws (not a black canvas)                        0% black, 360 colours
+✓ the title's buttons are inside the game frame                      3 buttons
+✓ the page doesn't scroll sideways                                   
+✓ the page says you fly a cave of your own, and the ghost isn't in it You get a fresh cave of yours, and the ghost flies beside you at the p
+✓ no sound, and no audio context, before the visitor's first input   {"muted":false,"context":"none","played":0}
+✓ Practice starts and the sim advances                               tick 179, 45 pts
+✓ …drawing the cave (not a black canvas)                             0% black, 456 colours
+✓ …and a board refresh that lands mid-run leaves the run on screen (no title card over it) overlay: title hidden
+✓ the run ends with a result                                         CRASHED 107 points · 107 m · 0 gems Now race a ghost: #2 fle
+✓ sound starts with the first input: the countdown and the crash were played {"muted":false,"context":"running","played":6}
+✓ the sound button mutes and unmutes, and says which                 Sound: off → Sound: on
+✓ the ghost list reads the deployed contract, v4                     v4.near-ghost-duels-rywu8u.testnet · 16 ghosts: 14 private duels, 2 on the public ladder
+✓ …in groups: the public ladder, other players' duels                The public ladder | Other players' duels
+✓ a visitor is offered Play for real (a guest account), and nothing more Practice is free and needs nothing. To race for real, press 
+✓ a stranger gets only a practice race against a duel                Practice race, Watch
+✓ Watch re-flies a ghost and matches its on-chain score and log hash REPLAYED IN THIS BROWSER GHOST #6 This page re-flew its 767 recorded b
+✓ no console errors                                                  
+All 41 page checks passed.
+
+$ for i in 36..43: npx tsx demo/mutants.ts $i   (the page mutants)
+✓ caught    1. the page hides a ghost someone is racing                           by a ghost someone is racing is still open to race
+✓ caught    1. the page's start_run leaves out max_fee                            by start_run always carries max_fee, at the fee the page showed
+✓ caught    1. the page's start_run leaves out min_pot (the pot it showed)        by start_run always carries max_fee, at the fee the page showed
+✓ caught    1. a hidden tab doesn't end a real run                                by a real run ends itself before the 90 s deadline, and when the tab is hidden
+✓ caught    1. the page offers a duel for real to an account its owner didn't name by a duel is raced for real only by the players its owner named; the ladder by anyone but its owner
+✓ caught    1. a link may point the page at anything, not only an account id      by a link can't point the page at something that isn't an account id
+✓ caught    1. the page draws a contract's answer as it came (a score that is markup) by what a contract answers is coerced before it is drawn: markup never survives as a number, an amount or an account
+✓ caught    1. the page names a duel's challengers with the session key (no 1 yoctoNEAR) by flying for a ghost: the ladder stakes nothing; a duel names 1-16 others, pot ≥ stake, signed with the full-access key
+8/8 page mutants caught

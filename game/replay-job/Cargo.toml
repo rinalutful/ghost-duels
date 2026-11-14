@@ -1,0 +1,14 @@
+[package]
+name = "ghost-replay-job"
+description = "The replay job: reads {seed, log} on stdin, replays the run with ghost-sim, prints {score, final_state_hash, log_hash}. Built for wasm32-wasip2 (OutLayer's TEE workers, or wasmtime locally)"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+ghost-sim = { path = "../sim" }
+serde_json = "1"
+sha2 = "0.10"
+hex = "0.4"

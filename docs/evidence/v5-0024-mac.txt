@@ -1,0 +1,79 @@
+# v5 after 0024 (min_pot; retire closes a stale race first), macOS, 2026-11-13, at the commit after 4677103.
+# Each suite run by its own command, not through judge:full: the local-node sandbox suite was NOT
+# rerun on this build (the machine had too little disk to build near-workspaces). Its last run,
+# All 60 checks passed, is of the v5 build before 0024: judge-full-mac-v5.txt.
+
+$ (cd res && shasum -a 256 -c SHA256SUMS)
+ghost_duels.wasm: OK
+ghost_replay_job.wasm: OK
+ghost_sim_web.wasm: OK
+mock_outlayer.wasm: OK
+
+$ (cd contracts && cargo test --lib -p ghost-duels)
+test tests::attack_failed_outlayer_call_refunds_the_fee ... ok
+test tests::attack_cheap_qualifier_then_refill_is_refused ... ok
+test tests::a_qualifier_that_can_start_can_always_submit ... ok
+test tests::a_failed_withdrawal_comes_back_to_the_balance ... ok
+test tests::attack_ghost_ids_past_u32_dont_alias ... ok
+test tests::attack_ghost_with_pot_below_stake_cannot_be_raced ... ok
+test tests::a_stale_race_is_closed_by_the_next_challenger ... ok
+test tests::attack_on_chain_only_deploy_refuses_offchain_replayers ... ok
+test tests::attack_key_cap_counts_losses_not_the_refunded_reserve ... ok
+test tests::attack_a_pot_swapped_for_a_smaller_one_is_refused_by_min_pot ... ok
+test tests::a_forfeit_closed_by_retire_locks_the_pot_like_any_other_growth ... ok
+test tests::attack_best_of_n_minting_costs_every_try ... ok
+test tests::attack_owner_cannot_confiscate_a_qualifier_with_its_terms ... ok
+test tests::attack_owner_cannot_change_a_qualifier_mid_run ... ok
+test tests::attack_no_free_refund_for_a_known_loser ... ok
+test tests::attack_storage_is_paid_on_every_path ... ok
+test tests::attack_key_cap_counts_ghost_log_and_settlement_storage ... ok
+test tests::attack_two_challengers_cannot_race_a_duel_at_once ... ok
+test tests::attack_stolen_session_key_is_capped ... ok
+test tests::attack_stranger_cannot_race_a_private_duel ... ok
+test tests::attack_zero_cap_key_cannot_burn_the_balance ... ok
+test tests::attack_owner_cannot_take_the_pot_from_under_a_racing_challenger ... ok
+test tests::attack_abandoned_challenges_are_forfeits_and_cost ... ok
+test tests::cannot_challenge_own_ghost - should panic ... ok
+test tests::challenger_wins_takes_the_pot ... ok
+test tests::attack_owner_powers_are_bounded ... ok
+test tests::beaten_ghost_needs_refill - should panic ... ok
+test tests::challenger_loses_stake_is_split_rake_pot_owner ... ok
+test tests::late_submit_refused - should panic ... ok
+test tests::malformed_log_refused_at_submit - should panic ... ok
+test tests::only_owner_transfers - should panic ... ok
+test tests::practice_run_is_verified_and_its_fee_and_reserve_come_back ... ok
+test tests::edited_score_is_refused_and_forfeits ... ok
+test tests::attack_mutual_choice_bypasses_are_refused ... ok
+test tests::qualifier_becomes_a_ghost_on_chain ... ok
+test tests::runner_mode_checks_runner_and_log_hash ... ok
+test tests::stake_needs_balance - should panic ... ok
+test tests::withdraw_is_full_access_only ... ok
+test tests::traded_ghost_pays_its_new_owner ... ok
+test tests::public_ladder_counts_the_record_and_moves_no_money ... ok
+test tests::settlement_storage_fits_in_the_reserve ... ok
+test tests::attack_holding_a_duel_needs_a_named_account_and_costs_every_time ... ok
+test tests::attack_wash_trade_shows_its_cost ... ok
+test tests::attack_wash_trade_near_misses_cost_what_the_record_says ... ok
+test tests::attack_guest_sybils_cannot_reach_staked_play ... ok
+test tests::property_ledger_conserved_and_storage_covered_on_chain ... ok
+test tests::property_ledger_conserved_and_storage_covered_runner ... ok
+test tests::property_a_session_key_never_loses_more_than_its_cap ... ok
+test result: ok. 48 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.27s
+
+$ npm run attack
+32/32 attacks answered as stated: 28 refused, 4 priced.
+
+$ (cd game && cargo test -q --lib -p ghost-sim)
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+$ npm run killtest
+PASS: 47/47 identical. Digest of all results: 3b478e3a84315beb6c41c9e28ca34235da2f2bb0a9e22b2759cea0bb324e0a61
+
+$ npm run coreloop
+All 25 core-loop checks passed.
+
+$ npm run mutants
+51/51 mutants caught (74 s)
+
+$ npm run build:web && npm run page-test
+All 41 page checks passed.
